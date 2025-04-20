@@ -1,0 +1,23 @@
+{
+  "name": "cloudbrain",
+  "version": "0.1.0",
+  "description": "CloudBrain LangGraph Agent with ChiefEditorAgent",
+  "main": "agent.py",
+  "entry_point": "ChiefEditorAgent",
+  "dependencies": {
+    "langchain": "latest",
+    "langgraph": "latest",
+    "python-dotenv": "latest"
+  },
+  "graphs": {
+    "cloudbrain": "agent:workflow"
+  },
+  "environment": {
+    "python_path": ".",
+    "env_file": ".env"
+  },
+  "ports": {
+    "api": 8000,
+    "websocket": 8001
+  }
+} 
