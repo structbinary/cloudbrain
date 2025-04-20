@@ -77,18 +77,6 @@ The workflow includes:
 - State transitions between different stages of processing
 - Human-in-the-loop feedback mechanisms
 
-You can generate this diagram programmatically using the `draw_workflow_graph()` method:
-
-```python
-from cloudbrain.agent import ChiefEditorAgent
-
-# Create an agent
-agent = ChiefEditorAgent({"query": "example query"})
-
-# Draw the workflow graph
-agent.draw_workflow_graph("cloudbrain_graph.png")
-```
-
 ### API Endpoints
 
 - `POST /api/copilotkit`: Chat with your AI team
