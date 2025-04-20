@@ -46,37 +46,22 @@ class SearcherAgent(BaseAgent):
         Returns:
             The updated state with web search results.
         """
-        # Log the start of web search
-        await self._log("Starting web search", self.agent_name)
-        
+
+        await self._log("Starting web search", self.agent_name)        
         try:
-            # Extract query and existing documents from state, handling both dictionary and object access
             if isinstance(state, dict):
                 query = state.get("user_query")
                 existing_documents = state.get("all_documents", [])
             else:
                 query = state.user_query
-                existing_documents = state.all_documents
-                
+                existing_documents = state.all_documents 
             if not query:
                 raise ValueError("No user query found in state")
-            
-            # Log the search query
             await self._log(f"Searching web for: {query}", self.agent_name)
-            
-            # Perform the web search
             search_results = await self._perform_web_search(query)
-            
-            # Process the search results
             web_documents = self._process_search_results(search_results)
-            
-            # Combine with existing documents
             all_documents = self._combine_documents(existing_documents, web_documents)
-            
-            # Log completion
             await self._log(f"Web search completed, found {len(web_documents)} new documents", self.agent_name)
-            
-            # Update and return the state
             return self._update_state(state, {
                 "all_documents": all_documents,
                 "web_documents": web_documents,
@@ -99,7 +84,6 @@ class SearcherAgent(BaseAgent):
         Returns:
             List of search results
         """
-        # Get API key from environment variable or configuration
         api_key = os.getenv("TAVILY_API_KEY")
         
         search_provider = self.search_factory.create_search(

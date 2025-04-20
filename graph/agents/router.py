@@ -43,38 +43,24 @@ class RouterAgent(BaseAgent):
         Returns:
             The updated state with routing decision.
         """
-        # Log the start of routing
         await self._log("Starting query routing", self.agent_name)
         
         try:
-            # Extract query from state, handling both dictionary and object access
             if isinstance(state, dict):
                 query = state.get("user_query")
             else:
                 query = state.user_query
-                
             if not query:
                 raise ValueError("No user query found in state")
-            
-            # Log the query being routed
             await self._log(f"Routing query: {query}", self.agent_name)
-            
-            # Determine the appropriate data source
             route_decision = await self._route_query(query)
-            
-            # Log the routing decision
             await self._log(f"Routing decision: {route_decision}", self.agent_name)
-            
-            # Update and return the state
             return self._update_state(state, {
                 "route_decision": route_decision
             })
             
         except Exception as e:
-            # Log error
             await self._log(f"Error during routing: {e}", self.agent_name)
-            
-            # Return the state unchanged
             return state
     
     async def _route_query(self, query: str) -> str:

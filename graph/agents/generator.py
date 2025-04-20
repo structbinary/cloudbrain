@@ -33,11 +33,9 @@ class GeneratorAgent(BaseAgent):
         Returns:
             The updated state with generated code.
         """
-        # Log the start of generation
         await self._log("Starting code generation", self.agent_name)
         
         try:
-            # Extract documents and query from state, handling both dictionary and object access
             if isinstance(state, dict):
                 documents = state.get("all_documents", [])
                 query = state.get("user_query")
@@ -47,29 +45,16 @@ class GeneratorAgent(BaseAgent):
                 
             if not query:
                 raise ValueError("No user query found in state")
-            
-            # Log the number of documents being processed
             await self._log(f"Processing {len(documents)} documents for generation", self.agent_name)
-            
-            # Format documents for the prompt
             formatted_docs = self._format_documents(documents)
-            
-            # Generate the code
             generation = await self._generate_terraform_code(query, formatted_docs)
-            
-            # Log completion
             await self._log("Code generation completed successfully", self.agent_name)
-            
-            # Update and return the state
             return self._update_state(state, {
                 "generation": generation
             })
             
         except Exception as e:
-            # Log error
             await self._log(f"Error during code generation: {e}", self.agent_name)
-            
-            # Return the state unchanged
             return state
     
     async def _generate_terraform_code(self, query: str, documents: str) -> str:
@@ -82,15 +67,10 @@ class GeneratorAgent(BaseAgent):
         Returns:
             Generated Terraform code
         """
-        # Log the query being used for generation
         await self._log(f"Generating code for query: {query}", self.agent_name)
         
-        # Use the prompt template to create the prompt
         prompt = self.prompt_template.format(query=query, documents=documents)
-        
-        # Invoke the LLM with the prompt
         response = await self.llm.ainvoke(prompt)
-        
         return response.content
     
     def _format_documents(self, documents: List[Document]) -> str:
@@ -103,10 +83,8 @@ class GeneratorAgent(BaseAgent):
             Formatted document string
         """
         formatted_docs = []
-        
         for i, doc in enumerate(documents):
             formatted_docs.append(f"Document {i+1}:\n{doc.page_content}\n")
-        
         return "\n".join(formatted_docs)
     
     def _create_prompt_template(self) -> ChatPromptTemplate:

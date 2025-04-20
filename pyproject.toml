@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "cloudbrain"
+version = "0.1.0"
+description = "CloudBrain - LangGraph based AI agent system"
+authors = ["structbinary"]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+langchain = "0.3.23"
+langchain-core = "^0.3.54"
+langchain-community = "0.3.21"
+langchain-openai = "0.3.12"
+langgraph = "0.3.27"
+langchain-chroma = "^0.2.3"
+colorama = "^0.4.6"
+copilotkit = "0.1.44"
+python-dotenv = "1.1.0"
+pydantic = "2.11.3"
+pydantic-settings = "2.8.1"
+openai = "1.70.0"
+rich = "14.0.0"
+loguru = "0.7.3"
+bcrypt = "4.0.1"
+python-jose = ">=3.4.0"
+python-multipart = ">=0.0.20"
+SQLAlchemy = ">=2.0.38"
+passlib = ">=1.7.4"
+httpx = ">=0.28.1"
+httpx-sse = ">=0.4.0"
+cryptography = ">=44.0.1"
+fastapi = ">=0.112.2"
+uvicorn = ">=0.32.1"
+jinja2 = ">=3.1.5"
+anthropic = ">=0.49.0"
+psycopg2-binary = "*"
+PyMySQL = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api" 

@@ -25,7 +25,7 @@ class TerraformIngestion:
         self.vector_store_path = vector_store_path
         self.temp_dir = tempfile.mkdtemp()
         self.embeddings = OpenAIEmbeddings()
-        self.collection_name = "terraform_docs"  # Match the retriever's collection name
+        self.collection_name = "terraform_docs" 
         
     def read_repository_urls(self) -> List[str]:
         """Read repository URLs from the terraform-repository.url file."""
@@ -137,13 +137,11 @@ class TerraformIngestion:
     
     def run(self):
         """Run the complete ingestion process."""
-        # Read repository URLs
         repo_urls = self.read_repository_urls()
         print(f"Found {len(repo_urls)} repositories to process")
         
         all_documents = []
         
-        # Process each repository
         for repo_url in repo_urls:
             try:
                 repo_path = self.clone_repository(repo_url)
@@ -153,7 +151,6 @@ class TerraformIngestion:
             except Exception as e:
                 print(f"Error processing {repo_url}: {e}")
         
-        # Load all documents to the vector store
         self.load_documents_to_vectorstore(all_documents)
         print(f"Total documents processed: {len(all_documents)}")
 

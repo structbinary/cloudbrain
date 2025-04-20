@@ -41,7 +41,7 @@ class BaseAgent:
         Returns:
             Updated state
         """
-        # Handle both dictionary and object access
+        # Handling both dictionary and object access
         if isinstance(state, dict):
             # If state is a dictionary, update it directly and return
             return {**state, **updates}

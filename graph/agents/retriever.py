@@ -21,7 +21,7 @@ class RetrieverAgent(BaseAgent):
         super().__init__(websocket, stream_output, headers)
         self.config = config or {}
         self.agent_name = "RETRIEVER"
-        self.min_documents_threshold = 2  # Minimum number of documents to consider search successful
+        self.min_documents_threshold = 2 
         
         # Debug: Print config
         # print(f"DEBUG: Config received: {self.config}")
